@@ -44,14 +44,14 @@ def analyze_data(df, start_date, end_date, norms_dict, point_name):
 
         result_rows.append({
             'Ингридиент': col,
-            'Среднее значение': round(values.mean(), 2),
-            'Мин значение': round(values.min(), 2),
-            'Макс значение': round(values.max(), 2),
+            'Среднее значение': round(values.mean(), 3),
+            'Мин значение': round(values.min(), 3),
+            'Макс значение': round(values.max(), 3),
             'Норма нижняя': lower,
             'Норма верхняя': upper,
             'Кол-во анализов': len(values),
             'Кол-во превышений': exceed_count,
-            'Процент превышений': round((exceed_count / len(values)) * 100, 2)
+            'Процент превышений': round((exceed_count / len(values)) * 100, 3)
         })
 
     # === СПЕЦИАЛЬНАЯ ОБРАБОТКА ФЕНОЛА ПО ИЗМЕРЕНИЯМ ===
@@ -84,14 +84,14 @@ def analyze_data(df, start_date, end_date, norms_dict, point_name):
 
             result_rows.append({
                 'Ингридиент': 'Фенол',
-                'Среднее значение': round(values.mean(), 2),
-                'Мин значение': round(values.min(), 2),
-                'Макс значение': round(values.max(), 2),
+                'Среднее значение': round(values.mean(), 3),
+                'Мин значение': round(values.min(), 3),
+                'Макс значение': round(values.max(), 3),
                 'Норма нижняя': lower,
                 'Норма верхняя': upper,
                 'Кол-во анализов': len(values),
                 'Кол-во превышений': exceed_count,
-                'Процент превышений': round((exceed_count / len(values)) * 100, 2)
+                'Процент превышений': round((exceed_count / len(values)) * 100, 3)
             })
 
     return pd.DataFrame(result_rows)

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция по АРМ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #16a085;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .important {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .note {
+            background-color: #e7f5ff;
+            border-left: 4px solid #4dabf7;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .author {
+            font-style: italic;
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        code {
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #6c757d;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .signature {
+            text-align: right;
+            font-weight: bold;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Инструкция по АРМ</h1>
+
+    <h2>Структура проекта</h2>
+    <ul>
+        <li><code>analyze_data.exe</code> — основная программа для анализа</li>
+        <li><code>config.xlsx</code> — файл с настройками периода анализа</li>
+        <li><code>normative.xlsx</code> — файл с нормативными значениями</li>
+        <li>Папка <code>АРМ отчеты</code> — сюда программа сохраняет отчёты</li>
+    </ul>
+
+    <div class="warning">
+        <h3>Максимальный ЭТЕНШН</h3>
+        <p><strong>НЕЛЬЗЯ:</strong></p>
+        <ol>
+            <li>Менять название файлов</li>
+            <li>Менять расположение папок</li>
+            <li>Удалять с ПК python (язык программирования, на котором написана автоматизация)</li>
+            <li>Менять паттерн заполнения журнала ИСПЛ, менять его расположение и имя файла</li>
+        </ol>
+    </div>
+
+    <h2>Как запустить</h2>
+    <h3>Через сам exe-файл</h3>
+    <ul>
+        <li>Если необходимо, установите дату в файле <code>config.xlsx</code>, сохраните изменения и закройте файл</li>
+        <li>Дважды кликните по файлу <code>analyze_data.exe</code></li>
+        <li>Появится окно консоли, программа выполнит анализ. Окно закроется само</li>
+        <li>Отчёты появятся в папке <code>АРМ отчеты</code>. Их вы можете копировать, удалять, переименовывать</li>
+    </ul>
+
+    <div class="important">
+        <h3>Важно</h3>
+        <ul>
+            <li>Для корректной работы не перемещайте и не удаляйте файлы <code>config.xlsx</code>, <code>normative.xlsx</code></li>
+            <li>Папка <code>АРМ отчеты</code> используется для сохранения результатов, не удаляйте её</li>
+            <li>Если нужно изменить даты анализа, отредактируйте файл <code>config.xlsx</code></li>
+            <li>Перед запуском убедитесь, что файлы <code>config.xlsx</code> и <code>normative.xlsx</code> были закрыты</li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <h2>Примечание</h2>
+        <p>Допускаю, что с новой таблицей могут поменяться название или расположение файла. Для внесения подобных изменений откройте файл <code>main.py</code> в блокноте или другом редакторе и найдите фрагмент:</p>
+        
+        <pre><code>CONFIG_FILE = r'/home/cezar/Рабочий стол/auto_arm/config.xlsx'
+NORMS_FILE = r'/home/cezar/Рабочий стол/auto_arm/normative.xlsx'
+DATA_DIR = r'/home/cezar/Рабочий стол/arm_dev'
+REPORT_DIR = r'/home/cezar/Рабочий стол/auto_arm/reports'
+
+FILES_TO_PROCESS = {
+    'Л2': os.path.join(DATA_DIR, 'Результаты испытатаний в точке Л2 (25).xlsx'),
+    'В2': os.path.join(DATA_DIR, 'Результаты испытатаний в точке В2 (25).xlsx'),
+    'Т2': os.path.join(DATA_DIR, 'Результаты испытатаний в точке Т2 (25).xlsx'),
+}</code></pre>
+
+        <p>Если изменился путь до файлов, то измените путь DATA_DIR на актуальный. Если изменилось название файла, то измените его на актуальное в файле <code>main.py</code> и сохраните изменения.</p>
+
+        <p>Например, для 26 года, если в названии файла поменяется лишь год, то изменение будет вида:</p>
+        
+        <pre><code>FILES_TO_PROCESS = {
+    'Л2': os.path.join(DATA_DIR, 'Результаты испытатаний в точке Л2 (26).xlsx'),
+    'В2': os.path.join(DATA_DIR, 'Результаты испытатаний в точке В2 (26).xlsx'),
+    'Т2': os.path.join(DATA_DIR, 'Результаты испытатаний в точке Т2 (26).xlsx'),
+}</code></pre>
+    </div>
+
+    <div class="author">
+        <h2>От автора</h2>
+        <p>Написано Вашим экологом - практикантом из Горного, Васяном)</p>
+        <p>Перебивать вручную результаты очень долго и неэффективно. Надеюсь, что данное решение поможет Вам.</p>
+        
+        <p>Автор не разработчик софта, а DWH, поэтому красивого графического интерфейса не будет) Данная программа не использует внешние сервисы, открытые небезопасные API и удаленные сервера, данные никуда не отправляются и не выгружаются, анализируя данные исключительно на ПК, где запущена.</p>
+        
+        <p>Команды тестировщиков нет, поручиться за безотказность и 100% точный результат не могу. Но если вы это читаете, значит я проверил ее на старых данных и результат совпал.</p>
+        
+        <p>С уважением, Василий</p>
+        
+        <p>P.S. Вероятность, что я смогу помочь удаленно, если что-то отвалится, низкая, но не нулевая)</p>
+        
+        <div class="image-container">
+            <img src="image.png" alt="Подпись автора">
+        </div>
+    </div>
+</body>
+</html>
